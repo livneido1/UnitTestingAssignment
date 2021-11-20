@@ -9,15 +9,15 @@ public interface Bridge {
 
         public int addNewConcert
                 (String concertName, String kind, String Location, String Theater,LocalDateTime date,
-                 Time hour, LocalDateTime lastOrderDate, User currentUser);
+                 LocalDateTime hour, LocalDateTime lastOrderDate, String userEmail);
 
-        public int approvePayment(String userId, Order order, Boolean approved);
+        public int approvePayment(String userEmail, int order_id, Boolean approved);
 
-        public int userOrderChairs(User currentUser, Concert concert, List<Integer> charirs);
+        public int userOrderChairs(String userEmail, int concertId, List<Integer> charis);
 
-        public int orderChair(String name , String email, String phoneNumber, Concert concert,
+        public int orderChair(String name , String email, String phoneNumber, int concertId,
                               List<Integer> chairs);
 
-        public User login(String email, String password);
+        public int login(String email, String password);
 
 }

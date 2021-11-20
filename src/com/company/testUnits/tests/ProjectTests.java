@@ -1,9 +1,9 @@
 package com.company.testUnits.tests;
-
 import com.company.testUnits.Bridge;
-import org.junit.Assert;
 import org.junit.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+
+import java.time.LocalDateTime;
 
 public abstract class ProjectTests {
      protected Bridge bridge;
@@ -11,7 +11,9 @@ public abstract class ProjectTests {
 
     @Test
     public void createConcertWithUnknownHour_Success(){
-        assert false;
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),null,LocalDateTime.now(), "ido@test.com");
+        assert concert > 0 ;
     }
 
     @Test

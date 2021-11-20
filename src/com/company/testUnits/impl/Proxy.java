@@ -7,23 +7,24 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Proxy implements Bridge {
+
     @Override
-    public int addNewConcert(String concertName, String kind, String Location, String Theater, LocalDateTime date, Time hour, LocalDateTime lastOrderDate, User currentUser) {
+    public int addNewConcert(String concertName, String kind, String Location, String Theater, LocalDateTime date, LocalDateTime hour, LocalDateTime lastOrderDate, String userEmail) {
         return 0;
     }
 
     @Override
-    public int approvePayment(String userId, Order order, Boolean approved) {
+    public int approvePayment(String userEmail, int order_id, Boolean approved) {
         return 0;
     }
 
     @Override
-    public int userOrderChairs(User currentUser, Concert concert, List<Integer> charirs) {
+    public int userOrderChairs(String userEmail, int concertId, List<Integer> charis) {
         return 0;
     }
 
     @Override
-    public int orderChair(String name, String email, String phoneNumber, Concert concert, List<Integer> chairs) {
+    public int orderChair(String name, String email, String phoneNumber, int concertId, List<Integer> chairs) {
         return 0;
     }
 
