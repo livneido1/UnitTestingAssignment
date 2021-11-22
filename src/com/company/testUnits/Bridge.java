@@ -12,7 +12,7 @@ public interface Bridge {
                 (String concertName, String kind, String Location, String Theater, LocalDateTime date,
                  LocalTime hour, LocalDateTime lastOrderDate, double price, String userEmail);
 
-        public int approvePayment(String userEmail, int order_id, Boolean approved);
+        public Boolean approvePayment(String userEmail, int order_id);
 
         public int orderSeats(String name , String email, String phoneNumber, int concertId,
                               List<Integer> chairs);

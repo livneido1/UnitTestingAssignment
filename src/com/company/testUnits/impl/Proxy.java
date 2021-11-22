@@ -1,6 +1,7 @@
 package com.company.testUnits.impl;
 
 import com.company.testUnits.Bridge;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
@@ -18,8 +19,8 @@ public class Proxy implements Bridge {
     }
 
     @Override
-    public int approvePayment(String userEmail, int order_id, Boolean approved) {
-        return 0;
+    public Boolean approvePayment(String userEmail, int order_id) {
+        return false;
     }
 
 
