@@ -1,11 +1,7 @@
 package com.company.testUnits.tests;
+
 import com.company.testUnits.Bridge;
 import org.junit.Test;
-
-
-import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
 
 public abstract class ProjectTests {
      protected Bridge bridge;
