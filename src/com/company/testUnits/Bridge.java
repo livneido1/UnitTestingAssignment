@@ -10,7 +10,7 @@ public interface Bridge {
 
         public int addNewConcert
                 (String concertName, String kind, String Location, String Theater, LocalDateTime date,
-                 LocalTime hour, LocalDateTime lastOrderDate, String userEmail);
+                 LocalTime hour, LocalDateTime lastOrderDate, double price, String userEmail);
 
         public int approvePayment(String userEmail, int order_id, Boolean approved);
 

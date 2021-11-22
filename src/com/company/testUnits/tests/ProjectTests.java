@@ -1,6 +1,9 @@
 package com.company.testUnits.tests;
 import com.company.testUnits.Bridge;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import sun.awt.image.ImageWatched;
 
 
 import java.time.LocalDateTime;
@@ -26,20 +29,25 @@ public abstract class ProjectTests {
     private String theater_2 = "2";
     private LocalTime hour_1 = LocalTime.of(1,30);
 
+    private String name_salesMan = "sales";
+    private String email_salesMan = "sales@gmail.com";
+    private String password_salesMan = "bB1234567890";
+    private String  phoneNumber_salesMan = "0549876543";
+
 
 
 
     @Test
     public void createConcertWithUnknownHour_Success(){
         int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
-                LocalDateTime.now(),null,LocalDateTime.now().plusDays(1), "ido@test.com");
+                LocalDateTime.now(),null,LocalDateTime.now().plusDays(1), 1,"ido@test.com");
         assert (concert > 0) ;
     }
 
     @Test
     public void createConcertWithUnknownHour_notValidTheater(){
         int concert  = bridge.addNewConcert("test" , kind_comedy, location_TLV,"UnKnown" ,
-                LocalDateTime.now().plusDays(30), null, LocalDateTime.now().plusDays(20), email_tester1);
+                LocalDateTime.now().plusDays(30), null, LocalDateTime.now().plusDays(20), 1,email_tester1);
         assert  (concert == -1);
 
     }
@@ -47,70 +55,89 @@ public abstract class ProjectTests {
     @Test
     public void createConcert_PastDate(){
         int concert1  = bridge.addNewConcert("test" , kind_comedy, location_TLV,theater_1,
-                LocalDateTime.now().minusDays(10),null , LocalDateTime.now().minusDays(20), email_tester1);
+                LocalDateTime.now().minusDays(10),null , LocalDateTime.now().minusDays(20),1, email_tester1);
         int concert2 = bridge.addNewConcert("test2" , kind_comedy, location_TLV,theater_1 ,
-                LocalDateTime.now().minusDays(5), null, LocalDateTime.now().minusDays(6), email_tester1);
+                LocalDateTime.now().minusDays(5), null, LocalDateTime.now().minusDays(6), 1,email_tester1);
 
         assert  ((concert1 == -1)&& (concert2 == -1)) ;    }
 
     @Test
     public void createConcert_invalidDate(){
         int concert1  = bridge.addNewConcert("test" , kind_comedy, location_TLV,theater_1,
-                LocalDateTime.now().minusDays(10), null, LocalDateTime.now().minusDays(20), email_tester1);
-
+                LocalDateTime.now().minusDays(10), null, LocalDateTime.now().minusDays(20), 1,email_tester1);
+        assert ( concert1 == -1);
     }
 
     @Test
     public void createConcertWithUnknownHour_inValidCity(){
-        assert false;
+        int concert1  = bridge.addNewConcert("test" , kind_comedy, "Mars",theater_1,
+                LocalDateTime.now().minusDays(10), null, LocalDateTime.now().minusDays(20),1, email_tester1);
+        assert ( concert1 == -1);
 
     }
 
     @Test
-    public void orderSeatsWithUnkownHour_freeSeats(){
-        List<Integer> charList =  new LinkedList<>();
-        charList.add(1);
-        int first  = bridge.orderSeats("ido" , "email", "0502008215"
-                ,152,charList  );
-        // already taken chair
-        int sec  = bridge.orderSeats("ayala" , "email@gmail.com", "0502008215"
-                ,152,charList  );
-        assert (first != -1 ) && (sec == -1);
+    public void orderSeatsWithUnknownHour_freeSeats(){
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),null,LocalDateTime.now().plusDays(1),1, "ido@test.com");
+
+        LinkedList<Integer> seats = new LinkedList<>();
+        seats.add(1);
+        int orderID = bridge.orderSeats(name_tester1,email_tester1,phoneNumber_tester1,1, seats);
+        assert (orderID != -1);
     }
 
 
     @Test
     public void orderSeatsWithUnkownHour_inValidPhoneNumer(){
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),null,LocalDateTime.now().plusDays(1),1, "ido@test.com");
 
+        LinkedList<Integer> seats = new LinkedList<>();
+        seats.add(1);
+        int orderID = bridge.orderSeats(name_tester1,email_tester1,"0589a!3$123",1, seats);
+        assert (orderID != -1);
     }
 
     @Test
     public void  orderSeatsWithUnkownHour_phoneNumberOutOfCountry(){
-        assert false;
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),null,LocalDateTime.now().plusDays(1), 1,"ido@test.com");
 
+        LinkedList<Integer> seats = new LinkedList<>();
+        seats.add(1);
+        int orderID = bridge.orderSeats(name_tester1,email_tester1,"+902200821512",1, seats);
+        assert (orderID != -1);
     }
 
     @Test
     public void loginValid(){
-        assert false;
+        int userID = bridge.login(email_tester1,password_tester1);
+        assert (userID != 1);
     }
 
     @Test
     public void loginWrongPassword(){
-        assert false;
+        int userID = bridge.login(email_tester1,password_tester1 + "!");
+        assert (userID == -1);
     }
     @Test
     public void loginNullPassword(){
-        assert false;
+        int userID = bridge.login(email_tester1,null);
+        assert (userID == -1);
     }
     @Test
     public void createConcertValid(){
-        assert false;
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),LocalTime.of(17,30),LocalDateTime.now().plusDays(1),1, "ido@test.com");
+        assert (concert > 0) ;
 
     }
     @Test
     public void createConcertNegativeTicketPrice(){
-        assert false;
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),LocalTime.of(17,30),LocalDateTime.now().plusDays(1), -1,"ido@test.com");
+        assert (concert ==-1) ;
 
     }
 
@@ -118,27 +145,50 @@ public abstract class ProjectTests {
 
     @Test
     public void createConcertOutOfBoundTicketPrice(){
-        assert false;
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),LocalTime.of(17,30),LocalDateTime.now().plusDays(1), Integer.MAX_VALUE +1,"ido@test.com");
+        assert (concert ==-1) ;
 
     }
 
 
     @Test
-    public void orderSeatsRegularCutomer(){
-        assert false;
+    public void orderSeatsRegularCustomer(){
+        createConcertValid();
+        LinkedList<Integer> seats = new LinkedList<>();
+        seats.add(1);
+        int orderID = bridge.orderSeats(name_tester2,null,phoneNumber_tester2,1, seats);
+        assert (orderID != -1);
     }
 
     @Test
     public void orderSeats_NegativeSeat(){
-        assert false;
+        createValidConcert();
+        LinkedList<Integer> seats = new LinkedList<>();
+        seats.add(-1);
+        int orderID = bridge.orderSeats(name_tester2,null,phoneNumber_tester2,1, seats);
+        assert (orderID == -1);
     }
     @Test
     public void orderSeatsIndexOutOfIntegerBounds(){
-        assert false;
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),LocalTime.of(17,30),LocalDateTime.now().plusDays(1), 1,"ido@test.com");
+
+        LinkedList<Integer> seats = new LinkedList<>();
+        seats.add(Integer.MAX_VALUE+1);
+        int orderID = bridge.orderSeats(name_tester2,null,phoneNumber_tester2,1, seats);
+        assert (orderID != -1);
     }
     @Test
     public void approvePayment(){
-        assert false;
+        int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),LocalTime.of(17,30),LocalDateTime.now().plusDays(1), 1,"ido@test.com");
+
+        LinkedList<Integer> seats = new LinkedList<>();
+        seats.add(1);
+        int orderID = bridge.orderSeats(name_tester2,null,phoneNumber_tester2,1, seats);
+
+        bridge.approvePayment(email_salesMan,orderID,true);
     }
 
     @Test
@@ -164,6 +214,20 @@ public abstract class ProjectTests {
     @Test
     public void cancelOrder_IdOutOfIntegerBounds(){
         assert false;
+    }
+
+
+    private int createValidConcert(){
+        return bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
+                LocalDateTime.now(),LocalTime.of(17,30),LocalDateTime.now().plusDays(1), 1,"ido@test.com");
+
+    }
+
+    private int orderValidSeats(){
+        LinkedList<Integer> seats = new LinkedList<>();
+        seats.add(1);
+        int concert = createValidConcert();
+        return bridge.orderSeats(name_tester1,email_tester1,phoneNumber_tester1,concert, seats);
     }
 
 
