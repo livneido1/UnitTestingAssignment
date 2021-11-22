@@ -11,7 +11,9 @@ public class Proxy implements Bridge {
 
 
     @Override
-    public int addNewConcert(String concertName, String kind, String Location, String Theater, LocalDateTime date, LocalTime hour, LocalDateTime lastOrderDate, String userEmail) {
+    public int addNewConcert(String concertName, String kind, String Location,
+                             String Theater, LocalDateTime date, LocalTime hour,
+                             LocalDateTime lastOrderDate, double price, String userEmail) {
         return 0;
     }
 
