@@ -18,15 +18,12 @@ public class Proxy implements Bridge {
         return 0;
     }
 
+
     @Override
-    public int userOrderChairs(String userEmail, int concertId, List<Integer> charis) {
+    public int orderSeats(String name, String email, String phoneNumber, int concertId, List<Integer> chairs) {
         return 0;
     }
 
-    @Override
-    public int orderChair(String name, String email, String phoneNumber, int concertId, List<Integer> chairs) {
-        return 0;
-    }
 
     @Override
     public int login(String email, String password) {
