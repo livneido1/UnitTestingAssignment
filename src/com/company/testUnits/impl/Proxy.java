@@ -1,15 +1,12 @@
 package com.company.testUnits.impl;
 
 import com.company.testUnits.Bridge;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 public class Proxy implements Bridge {
-
 
     @Override
     public int addNewConcert(String concertName, String kind, String Location,

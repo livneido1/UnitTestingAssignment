@@ -1,16 +1,14 @@
 package com.company.testUnits.tests;
 import com.company.testUnits.Bridge;
 import com.company.testUnits.impl.Proxy;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import sun.awt.image.ImageWatched;
+
 
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.LinkedList;
-import java.util.List;
 
 public abstract class ProjectTests {
     protected Bridge bridge ;
