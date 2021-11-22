@@ -1,9 +1,9 @@
 package com.company.testUnits.tests;
 import com.company.testUnits.Bridge;
-import org.junit.After;
+import com.company.testUnits.impl.Proxy;
 import org.junit.Before;
 import org.junit.Test;
-import sun.awt.image.ImageWatched;
+
 
 
 import java.time.*;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 
 public abstract class ProjectTests {
-     protected Bridge bridge;
+    protected Bridge bridge;
     private String email_tester1 = "Test@gmail.com";
     private String email_tester2 = "Test2@gmail.com";
     private String name_tester1 =  "tester1";
@@ -37,7 +37,9 @@ public abstract class ProjectTests {
     private String  phoneNumber_salesMan = "0549876543";
 
 
-
+    public ProjectTests(){
+        this.bridge= new Proxy();
+    }
 
     @Test
     public void createConcertWithUnknownHour_Success(){
@@ -190,12 +192,13 @@ public abstract class ProjectTests {
         seats.add(1);
         int orderID = bridge.orderSeats(name_tester2,null,phoneNumber_tester2,1, seats);
 
-        bridge.approvePayment(email_salesMan,orderID);
+        assert bridge.approvePayment(email_salesMan,orderID);
     }
 
     @Test
     public void approvePayment_wrongDetails(){
-        assert false;
+        int orderID = orderValidSeats();
+        assert ! (bridge.approvePayment(email_salesMan, -3));
     }
 
     @Test

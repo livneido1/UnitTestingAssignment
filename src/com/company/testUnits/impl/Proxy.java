@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Proxy implements Bridge {
 
-
     @Override
     public int addNewConcert(String concertName, String kind, String Location,
                              String Theater, LocalDateTime date, LocalTime hour,
