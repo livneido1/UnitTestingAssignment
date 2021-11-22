@@ -35,5 +35,6 @@ public class Proxy implements Bridge {
 
     @Override
     public boolean cancelOrder(int orderId) {
+        return true;
     }
 }
