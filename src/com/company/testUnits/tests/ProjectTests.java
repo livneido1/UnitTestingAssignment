@@ -9,6 +9,20 @@ import java.util.List;
 
 public abstract class ProjectTests {
      protected Bridge bridge;
+    private String email_tester1 = "Test@gmail.com";
+    private String email_tester2 = "Test2@gmail.com";
+    private String name_tester1 =  "tester1";
+    private String name_tester2 =  "tester2";
+    private String password_tester2 = "aA0987654321";
+    private String password_tester1  = "123456789Aa";
+    private String phoneNumber_tester1 = "0501234567";
+    private String phoneNumber_tester2  = "0521234568";
+    private String kind_comedy = "Comedy";
+    private String kind_Ballet = "Ballet";
+    private String location_TLV = "Tel Aviv";
+    private String location_Netanya = "Netanya";
+    private String theater_1 = "1";
+    private String theater_2 = "2";
 
 
 
