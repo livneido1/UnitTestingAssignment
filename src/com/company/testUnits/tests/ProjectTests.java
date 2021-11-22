@@ -6,10 +6,12 @@ import org.junit.Test;
 import sun.awt.image.ImageWatched;
 
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.LinkedList;
 import java.util.List;
+
+import java.time.LocalDateTime;
+
 
 public abstract class ProjectTests {
      protected Bridge bridge;
@@ -188,7 +190,7 @@ public abstract class ProjectTests {
         seats.add(1);
         int orderID = bridge.orderSeats(name_tester2,null,phoneNumber_tester2,1, seats);
 
-        bridge.approvePayment(email_salesMan,orderID,true);
+        bridge.approvePayment(email_salesMan,orderID);
     }
 
     @Test
@@ -198,22 +200,26 @@ public abstract class ProjectTests {
 
     @Test
     public void approvePayment_orderNumberOutOfIntegerBounds(){
-        assert false;
+        assert (!bridge.approvePayment ( "ayala@gmail.com", Integer.MAX_VALUE + 1 ));
     }
 
     @Test
     public void cancelOrder(){
-        assert false;
+        int concert_id = createValidConcert ();
+        List<Integer> seats = new LinkedList<> (  );
+        seats.add ( 8 );
+        int order_id = bridge.orderSeats ( "Ayala", "ayala@gmail.com", "0501112223", concert_id, seats);
+        assert (bridge.cancelOrder ( order_id ));
     }
 
     @Test
     public void cancelOrder_invalidOrderId(){
-        assert false;
+        assert (bridge.cancelOrder ( 99 ));
     }
 
     @Test
     public void cancelOrder_IdOutOfIntegerBounds(){
-        assert false;
+        assert (bridge.cancelOrder ( Integer.MAX_VALUE + 1 ));
     }
 
 

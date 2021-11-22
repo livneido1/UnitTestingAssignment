@@ -2,7 +2,6 @@ package com.company.testUnits.impl;
 
 import com.company.testUnits.Bridge;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -18,8 +17,8 @@ public class Proxy implements Bridge {
     }
 
     @Override
-    public int approvePayment(String userEmail, int order_id, Boolean approved) {
-        return 0;
+    public boolean approvePayment(String userEmail, int order_id) {
+        return true;
     }
 
 
@@ -35,6 +34,6 @@ public class Proxy implements Bridge {
     }
 
     @Override
-    public void cancelOrder(int orderId) {
+    public boolean cancelOrder(int orderId) {
     }
 }
