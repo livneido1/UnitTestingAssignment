@@ -9,9 +9,10 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.LinkedList;
+import java.util.List;
 
 public abstract class ProjectTests {
-    protected Bridge bridge ;
+    protected Bridge bridge;
     private String email_tester1 = "Test@gmail.com";
     private String email_tester2 = "Test2@gmail.com";
     private String name_tester1 =  "tester1";
@@ -34,9 +35,8 @@ public abstract class ProjectTests {
     private String  phoneNumber_salesMan = "0549876543";
 
 
-    @Before
-    public void init(){
-        bridge = new Proxy();
+    public ProjectTests(){
+        this.bridge= new Proxy();
     }
 
     @Test
@@ -202,22 +202,26 @@ public abstract class ProjectTests {
 
     @Test
     public void approvePayment_orderNumberOutOfIntegerBounds(){
-        assert false;
+        assert (!bridge.approvePayment ( "ayala@gmail.com", Integer.MAX_VALUE + 1 ));
     }
 
     @Test
     public void cancelOrder(){
-        assert false;
+        int concert_id = createValidConcert ();
+        List<Integer> seats = new LinkedList<> (  );
+        seats.add ( 8 );
+        int order_id = bridge.orderSeats ( "Ayala", "ayala@gmail.com", "0501112223", concert_id, seats);
+        assert (bridge.cancelOrder ( order_id ));
     }
 
     @Test
     public void cancelOrder_invalidOrderId(){
-        assert false;
+        assert (bridge.cancelOrder ( 99 ));
     }
 
     @Test
     public void cancelOrder_IdOutOfIntegerBounds(){
-        assert false;
+        assert (bridge.cancelOrder ( Integer.MAX_VALUE + 1 ));
     }
 
 
