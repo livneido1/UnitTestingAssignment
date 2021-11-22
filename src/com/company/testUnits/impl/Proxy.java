@@ -32,4 +32,8 @@ public class Proxy implements Bridge {
     public int login(String email, String password) {
         return 0;
     }
+
+    @Override
+    public void cancelOrder(int orderId) {
+    }
 }

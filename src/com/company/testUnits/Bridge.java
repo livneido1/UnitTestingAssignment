@@ -19,5 +19,5 @@ public interface Bridge {
                               List<Integer> chairs);
 
         public int login(String email, String password);
-
+        public void cancelOrder(int orderId);
 }

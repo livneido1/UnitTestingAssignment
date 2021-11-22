@@ -4,6 +4,8 @@ import org.junit.Test;
 
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class ProjectTests {
      protected Bridge bridge;
@@ -23,15 +25,24 @@ public abstract class ProjectTests {
 
     @Test
     public void orderConcertWithUnkownHour_freeChair(){
-        assert false;
+        List<Integer> charList =  new LinkedList<>();
+        charList.add(1);
+        int first  = bridge.orderChair("ido" , "email", "0502008215"
+                ,152,charList  );
 
+        assert (first != -1 ) ;
     }
 
 
     @Test
     public void orderConcertWithUnkownHour_ChairNotFree(){
-        assert false;
-
+        List<Integer> charList =  new LinkedList<>();
+        charList.add(1);
+        int first  = bridge.orderChair("ido" , "email", "0502008215"
+                ,152,charList  );
+        int sec  = bridge.orderChair("ayala" , "email@gmail.com", "0502008215"
+                ,152,charList  );
+        assert (first != -1 ) && (sec == -1);
     }
 
     @Test
