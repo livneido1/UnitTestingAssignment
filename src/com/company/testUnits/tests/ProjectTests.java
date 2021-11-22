@@ -4,6 +4,7 @@ import org.junit.Test;
 
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public abstract class ProjectTests {
     private String location_Netanya = "Netanya";
     private String theater_1 = "1";
     private String theater_2 = "2";
+    private LocalTime hour_1 = LocalTime.of(1,30);
 
 
 
@@ -31,23 +33,31 @@ public abstract class ProjectTests {
     public void createConcertWithUnknownHour_Success(){
         int concert = bridge.addNewConcert("test" , "Comedy" , "Tel aviv" , "",
                 LocalDateTime.now(),null,LocalDateTime.now().plusDays(1), "ido@test.com");
-        assert concert > 0 ;
+        assert (concert > 0) ;
     }
 
     @Test
     public void createConcertWithUnknownHour_notValidTheater(){
-        assert false;
+        int concert  = bridge.addNewConcert("test" , kind_comedy, location_TLV,"UnKnown" ,
+                LocalDateTime.now().plusDays(30), null, LocalDateTime.now().plusDays(20), email_tester1);
+        assert  (concert == -1);
 
     }
 
     @Test
     public void createConcert_PastDate(){
-        assert false;
-    }
+        int concert1  = bridge.addNewConcert("test" , kind_comedy, location_TLV,theater_1,
+                LocalDateTime.now().minusDays(10),null , LocalDateTime.now().minusDays(20), email_tester1);
+        int concert2 = bridge.addNewConcert("test2" , kind_comedy, location_TLV,theater_1 ,
+                LocalDateTime.now().minusDays(5), null, LocalDateTime.now().minusDays(6), email_tester1);
+
+        assert  ((concert1 == -1)&& (concert2 == -1)) ;    }
 
     @Test
     public void createConcert_invalidDate(){
-        assert false;
+        int concert1  = bridge.addNewConcert("test" , kind_comedy, location_TLV,theater_1,
+                LocalDateTime.now().minusDays(10), null, LocalDateTime.now().minusDays(20), email_tester1);
+
     }
 
     @Test
