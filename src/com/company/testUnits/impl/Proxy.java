@@ -9,10 +9,6 @@ import java.util.List;
 public class Proxy implements Bridge {
     Bridge real = null;
 
-    public void setReal(Bridge real) {
-        this.real = real;
-    }
-
     @Override
     public int addNewConcert(String concertName, String kind, String Location,
                              String Theater, LocalDateTime date, LocalTime hour,
